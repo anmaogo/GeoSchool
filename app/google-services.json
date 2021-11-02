@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "323257184899",
+    "project_id": "geoschool-fbbe9",
+    "storage_bucket": "geoschool-fbbe9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323257184899:android:96711d154a7f0fb72b21b6",
+        "android_client_info": {
+          "package_name": "com.example.geoschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323257184899-o1sphpc80n468d6fvph1ea2g6qjdhaoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH_0vBOiYu8bSeUz7Qc8Is7bwwVO6Vdf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323257184899-o1sphpc80n468d6fvph1ea2g6qjdhaoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

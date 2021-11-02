@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">GeoSchool</string>
+    <string name="hint_nombre">Introduce tu nombre</string>
+    <string name="hint_apellido">Introduce tu apellido</string>
+    <string name="hint_email">Introduce tu Email</string>
+    <string name="hint_contraseña">Contraseña</string>
+    <string name="hint_domicilio">Domicilio</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="notificacion_001">Diana - La ruta de su hijo estará llegando en 15 minutos, por  favor estar listos en el paradero!</string>
+    <string name="notificacion_002">Diana - Tenemos un retraso en el recorrido de 20 minutos por congestión vehicular. Agradecemos su comprensión!</string>
+    <string name="notification_title">NOTIFICACIONES GEOSCHOOL</string>
+    <string name="saludo_padre">Alerta GeoSchool</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_registro">Registro</string>
+    <string name="btn_facebook">Continuar con facebook</string>
+    <string name="btn_google">Continuar con Google</string>
+    <string name="tv_segumiento_ruta">Seguimiento \n Ruta</string>
+    <string name="tv_notificacion">Notificación</string>
+    <string name="tv_chat">Chat</string>
+    <string name="tv_califica">Califica</string>
+    <string name="tv_codigo_seguridad">Código \n Seguridad</string>
+    <string name="tv_gestion_ruta">Gestión \n Ruta</string>
+    <string name="title_activity_ruta" />
+    <string name="hnit">Ingrese una ruta</string>
+    <string name="Boton_imagenes">Item Imagenes</string>
+    <string name="menu_gestion_ruta">GESTION RUTA</string>
+    <string name="txt_nombre">Nombre del archivo</string>
+    <string name="boton_Guardar">Guardar</string>
+    <string name="boton_Consultar">Consultar</string>
+</resources>

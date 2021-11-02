@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="strUsuarios">
+        <item>Tipo de Usuario</item>
+        <item>Conductor</item>
+        <item>Padre de familia</item>
+        <item>Hijo</item>
+    </string-array>
+</resources>
