@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -14,6 +15,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +52,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 public class Ruta extends FragmentActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
@@ -60,6 +65,8 @@ public class Ruta extends FragmentActivity implements OnMapReadyCallback, TaskLo
     SensorManager sensorManager;
     Sensor lightSensor;
     SensorEventListener lighSensorListener;
+    Geocoder mGeocoder;
+
 
     //Simple localiotn atributes
     String permission = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -76,12 +83,17 @@ public class Ruta extends FragmentActivity implements OnMapReadyCallback, TaskLo
     //Draw route
     MarkerOptions place1;
     MarkerOptions place2;
+    public MarkerOptions bus;
     Polyline currentPolyline;
 
+    @SuppressLint("ServiceCast")
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        mGeocoder = new Geocoder(this);
 
         binding = ActivityRutaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -100,19 +112,35 @@ public class Ruta extends FragmentActivity implements OnMapReadyCallback, TaskLo
         //Request permission
         requestPermission(this, permission, "Access to GPS", permissionId);
 
-        place1= new MarkerOptions().position(new LatLng(4.780818, -74.054240)).title("School");
-        place2= new MarkerOptions().position(new LatLng(4.731610, -74.062501)).title("Home");
+        place1 = new MarkerOptions().position(new LatLng(4.780818, -74.054240)).title("School");
+        place2 = new MarkerOptions().position(new LatLng(4.731610, -74.062501)).title("Home");
 
         //place1= new MarkerOptions().position(new LatLng(4.780818, -74.054240)).title("Lugar 1");
         //place1= new MarkerOptions().position(new LatLng(4.731610, -74.062501)).title("Lugar 2");
 
-        String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
-        new FetchURL(Ruta.this).execute(url,"driving");
+        //String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
+        //new FetchURL(Ruta.this).execute(url,"driving");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private String searchByLocation(double latitude, double longitude){
+        String addressName="";
+        try {
+            List<Address> addresses = mGeocoder.getFromLocation(latitude, longitude, 2);
+            if(addresses !=null  && !addresses.isEmpty()){
+                Address addressResult = addresses.get(0);
+                addressName = addressResult.getAddressLine(0);
+                Log.i("MapsApp",addressResult.getFeatureName());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return addressName;
     }
 
     /**
@@ -177,10 +205,14 @@ public class Ruta extends FragmentActivity implements OnMapReadyCallback, TaskLo
                     current_longitude = location.getLongitude();
                     LatLng currentLocation = new LatLng(current_latitude, current_longitude);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                    String name = searchByLocation(current_latitude, current_longitude);
+                    bus= new MarkerOptions().position(new LatLng(current_latitude,current_longitude)).title("Home");
+                    String url = getUrl(place1.getPosition(), bus.getPosition(), "driving");
+                    new FetchURL(Ruta.this).execute(url,"driving");
 
 
                     //Market
-                    marker_current = mMap.addMarker(new MarkerOptions().position(currentLocation).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
+                    marker_current = mMap.addMarker(new MarkerOptions().position(currentLocation).title(name).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
 
 /*                    if(enfocar==0){
 

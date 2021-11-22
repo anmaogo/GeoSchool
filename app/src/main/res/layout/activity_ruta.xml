@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".Mapas" />
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/txt_search"
         android:layout_gravity="center_horizontal"
         android:drawableStart="@drawable/search_icon"
@@ -33,6 +33,6 @@
         android:imeOptions="actionSearch"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
 </FrameLayout>
